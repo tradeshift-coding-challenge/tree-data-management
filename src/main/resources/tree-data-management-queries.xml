@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+    
+    <entry key="QUERY_FIND_CURRENT_ANCESTOR_DEPTH">
+		SELECT MAX(fr.depth) FROM family_relation as fr WHERE fr.descendant_id = ?;
+    </entry> 
+     
+    <entry key="QUERY_GET-DESCENDANTS">
+		SELECT f.*, fr.* FROM family f JOIN family_relation fr ON f.id = fr.descendant_id WHERE fr.ancestor_id = ? AND fr.depth > 0;
+    </entry> 
+    
+    <entry key="QUERY_FIND_ROOT_NODE">
+			SELECT f.*, fr.* FROM family f JOIN family_relation fr ON f.id = fr.descendant_id WHERE f.id = 1;
+    </entry> 
+    
+    <entry key="QUERY_DELETE_OUTDATED_CLOUSER_PATHS">
+		DELETE fr FROM family_relation fr JOIN family_relation fr1 ON fr.descendant_id = fr1.descendant_id LEFT JOIN family_relation fr2 ON fr2.ancestor_id = fr1.ancestor_id AND fr2.descendant_id = fr.ancestor_id WHERE fr1.ancestor_id = ? AND fr2.ancestor_id IS NULL;
+    </entry>
+    
+    <entry key="QUERY_ADD_NEW_PATHS">
+		INSERT INTO family_relation (ancestor_id,descendant_id,depth) SELECT supertree.ancestor_id,subtree.descendant_id, supertree.depth + subtree.depth + 1 FROM family_relation AS supertree JOIN family_relation AS subtree WHERE subtree.ancestor_id = ? AND supertree.descendant_id = ?;
+    </entry>
+
+</properties>
