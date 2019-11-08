@@ -6,8 +6,8 @@
    Execute db script Datasetup.sql	 
 ## Only after step A & B is complete  
    docker run -d -p 8000:8000 --name tree-data-mangement --link tradeshift-mysql:mysql -d tradeshiftcodingchallenge/tree-data-management
+## Swagger
+   http://54.67.48.226:8000/swagger-ui.html#
 
-# Git Hub
-  tradeshift-coding-challenge / Temp@112019 
-# Docker Hub
-  tradeshiftcodingchallenge / Temp@112019
+
+
