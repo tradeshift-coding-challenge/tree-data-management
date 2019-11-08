@@ -9,5 +9,9 @@
 ## Swagger
    http://54.67.48.226:8000/swagger-ui.html#
 
+## Closure table Concept
+   To store hierarchic structures in a relational database.  
+   Used two tables. 
+   The first table will store basic information, while the second stores the connections between entities (ancestor-descendant relations).
 
 
